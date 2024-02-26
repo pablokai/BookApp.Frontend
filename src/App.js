@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import BasicTable from './components/BasicTable';
+import Layout from './pages/Layout';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Home from '../src/pages/home/Home'
 
+//default app as index element
+// in paths remaining all routes
+//when / go to layout
+//when visiting index element goes to home
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <BrowserRouter>
+      <Routes>
+          <Route path='/' element={<Layout/>}>
+          <Route path='/inicio' element={<Home/>}></Route>    
+          <Route path='/libros' element={<BasicTable/>}></Route>
+          </Route>    
+          
+      </Routes>
+    </BrowserRouter>
+
+   
   );
 }
 
