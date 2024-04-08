@@ -1,30 +1,51 @@
 body{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+#root{
+    min-height: 100vh;
 }
 .layout{
-    width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 h1{
-    color:aliceblue;
+    color:#f2f2f5;
 }
 
 .dashboard{
     background-color: #0b0a0a;
     flex: 1.8 1.8;
-    padding: 5vh 0% 8vh 0%;
+    padding: 0 0% 8vh 0%;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    min-height: 100%;
+}
+
+.container{
+    position: sticky;
+    top: 0;
+    padding-top: 10%;
 }
 
 .title{
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+}
+
+.title h1{
+    font-weight: 900;
+    margin-bottom: 0.8vh;
 }
 
 .title img{   
@@ -36,16 +57,17 @@ h1{
 }
 
 .menu{
-    color: white;
+    color:#a9a9aa;
     text-align: center;
     padding-left: 5%;
     padding-right: 5%;
+    font-weight: 600;
 }
 
 hr{
-    width: 80%;
+    width: 70%;
     margin: auto;
-    border-top: 1px solid #ffffff4d;
+    border-top: 1px solid rgba(55, 55, 56, 0.648);
     margin-bottom: 2vh;
 
 }
@@ -64,25 +86,49 @@ li{
 
 .menu ul:hover{
     background-color:#6749e2;
+    color: #f2f2f5;
 }
 
 .menu ul .item{
     padding-left: 5%;
-    font-size: 0.8vw;
+    font-size: 0.7vw;
 }
 
 .logout{
-    color: aliceblue;
+    color: rgb(157, 164, 174);
+    align-self: center;
+    justify-self: flex-end ;
+    display: grid;
 }
 
 .content{
     flex: 8.8 8.8;
-    background-color: #f2f2f5;
+    background-color: #f2f2f5; 
+    height: auto;
 }
 
 .top-bar{
     height: 5vh;
     background-color: #fffefe;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    cursor: pointer;
+}
+.user{
+
+}
+
+.profile{
+    object-fit: contain;
+    width: 3vw;
+    height: 3vh;
+}
+
+.render-body{
+    padding: 2%;
+    height: auto;
 }
 

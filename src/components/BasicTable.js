@@ -1,27 +1,75 @@
 import React from "react";
 import MUIDataTable from "mui-datatables";
+import '../styles/table.css'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function BasicTable() {
-  const columns = ["Name", "Company", "City", "State"];
+function BasicTable({tableData, tableColumns}) {
 
-  const data = [
-    ["Joe James", "Test Corp", "Yonkers", "NY"],
-    ["John Walsh", "Test Corp", "Hartford", "CT"],
-    ["Bob Herm", "Test Corp", "Tampa", "FL"],
-    ["James Houston", "Test Corp", "Dallas", "TX"],
-  ];
+  const getMuiTheme = () => 
+  createTheme({
+    components: {
+      MuiTypography:{
+        styleOverrides:{
+          root:{
+            fontFamily: '"Plus Jakarta Sans", sans-serif',
+          }
+        }
+      },
+      MuiTableCell:{
+        styleOverrides:{
+          root:{
+            fontFamily: '"Plus Jakarta Sans", sans-serif',
+          }
+        }
+      },
+      MuiButton:{
+        styleOverrides:{
+          root:{
+            fontFamily: '"Plus Jakarta Sans", sans-serif',
+          }
+        }
+      },
+      MuiTablePagination:{
+        styleOverrides:{
+          selectLabel:{
+            fontFamily: '"Plus Jakarta Sans", sans-serif',
+          },
+          displayedRows:{
+            fontFamily: '"Plus Jakarta Sans", sans-serif',
+          }
+        }
+      },
+      MuiPaper:{
+        styleOverrides:{
+          root:{
+            borderRadius: "10px",
+          }
+        }
+      },
+    }
+  });
 
   const options = {
-    filterType: "checkbox",
-    rowsPerPage : 2
+    filterType: "dropdown",
+    rowsPerPage : 20,
+    download: false,
+    print: false,
+    viewColumns: false,
+    selectableRows: 'none',
+    responsive: "simple"
   };
+
   return (
-    <MUIDataTable
-      title={"Employee List"}
-      data={data}
-      columns={columns}
-      options={options}
-    />
+    <>
+    <ThemeProvider theme={getMuiTheme()}>
+      <MUIDataTable
+        title={"Lista de libros"}
+        data={tableData}
+        columns={tableColumns}
+        options={options}
+      />
+    </ThemeProvider>
+    </>
   );
 }
 

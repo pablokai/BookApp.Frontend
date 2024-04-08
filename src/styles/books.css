@@ -1,0 +1,6 @@
+img{
+    object-fit: contain;
+    width: 2vw;
+    height: 2vh;
+    display: inline-block;
+}

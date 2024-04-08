@@ -3,7 +3,7 @@ import { Button } from 'flowbite-react';
 
 function Login() {
   return (
-    <div>hol</div>
+    <div>Hola</div>
   )
 }
 

@@ -4,6 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import logo from '../images/booklogo.png'
+import user from '../images/user.png'
 import {Outlet, Link} from 'react-router-dom';
 
 
@@ -22,8 +23,10 @@ const activateLink = (to) => {
 
             <div className='title'>
                <img src={logo} alt=''/>
-                <hr></hr>
+               <h1>Libros App</h1>
+                
             </div>
+            <hr></hr>
             <div className='menu'>
                 <li>
                     <ul>
@@ -32,29 +35,38 @@ const activateLink = (to) => {
                     </ul>
                     <ul>
                         <BookOutlinedIcon/>
-                        <Link className='item' to="/libros" >Libros</Link>
+                        <Link className='item' to="/libros">Libros</Link>
                     </ul>
+                    <br/>
+                    <hr></hr>
+                    <ul>
+                        <LoginOutlinedIcon/>
+                        <Link className='item' to="/" >Cerrar sesión</Link>
+                    </ul>  
                 </li>
             </div>
             
             </div>
-            <div className='logout'>
+            {/* <div className='logout'>
                 <li>
                     <ul>
                         <LoginOutlinedIcon/>
                         <a>Cerrar sesion</a>
                     </ul>   
                 </li>
-            </div>
+            </div> */}
         </div>
         <div className='content'>
             <div className='top-bar'>
                 <div></div>
                 <div className='user'>
-
+                    <img src={user} alt='' className='profile'></img>
                 </div>
             </div>
+            <div className='render-body'>
             <Outlet ></Outlet>
+            </div>
+            
         </div>
     </div>
     
