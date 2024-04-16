@@ -60,7 +60,7 @@ const activateLink = (to) => {
             <div className='top-bar'>
                 <div></div>
                 <div className='user'>
-                    <img src={user} alt='' className='profile'></img>
+                    
                 </div>
             </div>
             <div className='render-body'>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BasicTable from '../../components/BasicTable'
-import { Button } from "flowbite-react";
+import {useNavigate} from 'react-router-dom'
 import editicon from "../../images/pencil.png";
 import deleteicon from "../../images/delete.png";
 import '../../styles/books.css'
@@ -37,39 +37,44 @@ const data = [
 
 function Books() {
     const [dataList, setDataList]= useState([]);
+    const navigate = useNavigate();
 
-    const getData = () =>{
-        setDataList(data)
+    const getData = async () =>{
+        setDataList(await data)
     }
     
-
+    const redirectForm = (rowData, operacion) =>{
+        navigate('/formLibros', { state: { data: rowData, operation: operacion } });
+        
+    }
     useEffect( ()=>{
         getData();
     }, []);
 
     const columns = [
-        "Name", 
         {
-            name: "Cover",
+            name: "Portada",
             options: {
                 customBodyRender : (value) =>(
                         <img src={value} alt=''></img>
                 )
             }
         },
-        "Company", 
-        "City", 
-        "State", 
+        "Título", 
+        "Autor", 
+        "Edición", 
+        "Género", 
+        "Año Publicación",
         { name: "Acciones",
             options: {
                 customBodyRender : (value, tableMeta, updateValue) =>{
                     return (
                         <>
-                            <img src={editicon} alt=''></img>
-                            <img src={deleteicon} alt=''></img>
+                            <img src={editicon} alt='' onClick={() => redirectForm(tableMeta.rowData, 1)}></img>
+                            <img src={deleteicon} alt='' onClick={() => console.log(tableMeta.rowData)}></img>
 
-                            {/* <Button gradientMonochrome="teal" onClick={() => console.log(tableMeta.rowData)} style={{display: "inline-block"}} >Editar</Button>
-                            <Button gradientMonochrome="failure" style={{display: "inline-block"}}>Borrar</Button> */}
+                            {/* { <Button gradientMonochrome="teal" onClick={() => console.log(tableMeta.rowData)} style={{display: "inline-block"}} >Editar</Button>
+                            <Button gradientMonochrome="failure" style={{display: "inline-block"}}>Borrar</Button> } */}
                         </>
                     )
                 }
@@ -79,6 +84,14 @@ function Books() {
 
   return (
     <>
+    <div className='top-header'>
+        <div >
+             <h1>Lista de Libros</h1>
+        </div>
+        <div>
+            <button className='add-button' onClick={ ()=>{ redirectForm('', 2)}}>Agregar</button>
+        </div>
+    </div>
     <BasicTable tableData={dataList} tableColumns={columns}></BasicTable> 
     </>  
   )

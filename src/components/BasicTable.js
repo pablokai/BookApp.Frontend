@@ -63,7 +63,7 @@ function BasicTable({tableData, tableColumns}) {
     <>
     <ThemeProvider theme={getMuiTheme()}>
       <MUIDataTable
-        title={"Lista de libros"}
+        title={""}
         data={tableData}
         columns={tableColumns}
         options={options}
