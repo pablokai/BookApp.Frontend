@@ -39,10 +39,10 @@ const activateLink = (to) => {
                     </ul>
                     <br/>
                     <hr></hr>
-                    <ul>
+                    {/* <ul>
                         <LoginOutlinedIcon/>
                         <Link className='item' to="/" >Cerrar sesión</Link>
-                    </ul>  
+                    </ul>   */}
                 </li>
             </div>
             

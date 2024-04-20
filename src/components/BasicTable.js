@@ -51,7 +51,7 @@ function BasicTable({tableData, tableColumns}) {
 
   const options = {
     filterType: "dropdown",
-    rowsPerPage : 20,
+    rowsPerPage : 10,
     download: false,
     print: false,
     viewColumns: false,
