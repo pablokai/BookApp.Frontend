@@ -29,7 +29,6 @@ function Books() {
         const libro = new Libro(idLibro, "","","","","","",0,"",new Date(),"",0)
         const response = await EliminarLibro(libro);
         
-        console.log(response);
         response.estado === 1 ?? ListarLibros();
          
     }

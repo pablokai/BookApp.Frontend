@@ -1,17 +1,16 @@
 import React, { useEffect, useState} from 'react'
-import {useLocation} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import {ObtenerGenero, InsertarLibro} from '../../services/LibroService'
 import {  Alert } from "flowbite-react"; 
 import { toBase64 } from '../../utils/Base64Converter';
-
 
 function FormBooks( ) {
     const location = useLocation();
 
     const [operacion, setOperacion] = useState( location.state.operation);
     const [mensajeError, setMensajeError] = useState('');
-    const [mostrarMensaje, setMostrarMensaje] = useState(true);
-
+    const [mostrarMensaje, setMostrarMensaje] = useState(false);
+    const navigate = useNavigate();
 
     const [idLibro, setIdLibro] = useState(operacion === 1 ? location.state.data[0] : ''); 
     const [Titulo, setTitulo] = useState(operacion === 1 ? location.state.data[2] : ''); 
@@ -33,6 +32,9 @@ function FormBooks( ) {
         ObtenerGeneros();
     },[]);
 
+    const redirectForm = () =>{
+        navigate('/Libros');        
+    }
 
     const ObtenerGeneros = async ()=>{
         setListaGenero(await ObtenerGenero() );
@@ -58,18 +60,22 @@ function FormBooks( ) {
 
         }
         const response = await InsertarLibro(libro);
-        console.log(response);
-        
+        response.estado === 1  ??  redirectForm(); 
     }
 
    
 
     //changes
-    const onChangeIdLibro = (e) => setIdLibro(e.target.value);
 
     const onChangePortada = async (e) => {
         const target = e.target.files[0];
-        setPortada( target);
+        const extension = target.name.split(".").pop();
+        if( extension === "png" || extension === "jpg"){
+            setPortada( target);
+        }else{           
+            setMensajeError('   Los archivos deben ser png o jpg');
+            setMostrarMensaje(true);
+        }
     }
     return (
         <>
