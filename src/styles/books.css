@@ -33,7 +33,8 @@ img{
 }
 
 .bookcover{
-    object-fit: contain;
     border-radius: 10px;
-    height: 100%;
+    width: 80px;
+    height:80px;
+    object-fit: cover;
 }

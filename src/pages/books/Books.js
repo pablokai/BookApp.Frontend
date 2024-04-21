@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BasicTable from '../../components/BasicTable'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useLocation} from 'react-router-dom'
 import editicon from "../../images/pencil.png";
 import deleteicon from "../../images/delete.png";
 import '../../styles/books.css'
@@ -10,6 +10,7 @@ import { toBase64 } from '../../utils/Base64Converter';
 import { Libro } from '../../class/Libro';
 
 function Books() {
+
     const [dataList, setDataList]= useState([]);
     const [openModal, setOpenModal] = useState(false);
 
@@ -22,6 +23,7 @@ function Books() {
     }
     
     const redirectForm = (rowData, operacion) =>{
+        console.log(rowData);
         navigate('/formLibros', { state: { data: rowData, operation: operacion } });        
     }
 
@@ -49,8 +51,8 @@ function Books() {
             name: "portada",
             label: "Portada",
             options: {
-                customBodyRender : (value) =>(
-                        <img src={ value} alt='' className='bookcover'></img>
+                customBodyRender : (value) =>(                      
+                        <img src={value} alt='' className='bookcover'></img>
                 )
             }
         },
@@ -113,14 +115,13 @@ function Books() {
                 customBodyRender : (value, tableMeta, updateValue) =>{
                     return (
                         <>
-                            <img src={editicon} alt='' onClick={() => redirectForm(tableMeta.rowData, 1)}></img>
+                            <img src={editicon} alt='' onClick={() => redirectForm(tableMeta.rowData, 2)}></img>
                             <img src={deleteicon} alt='' onClick={() => 
                                 {
                                     setOpenModal(true);
                                     setIdLibro (tableMeta.rowData[0]);
                                 }}></img>
-                            {/* { <Button gradientMonochrome="teal" onClick={() => console.log(tableMeta.rowData)} style={{display: "inline-block"}} >Editar</Button>
-                            <Button gradientMonochrome="failure" style={{display: "inline-block"}}>Borrar</Button> } */}
+                            {}
                         </>
                     )
                 }
@@ -135,7 +136,7 @@ function Books() {
              <h1>Lista de Libros</h1>
         </div>
         <div>
-            <button className='add-button' onClick={ ()=>{ redirectForm('', 2)}}>Agregar</button>
+            <button className='add-button' onClick={ ()=>{ redirectForm('', 1)}}>Agregar</button>
         </div>
     </div>
     <BasicTable tableData={listaLibros} tableColumns={columns}></BasicTable> 
