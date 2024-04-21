@@ -1,7 +1,7 @@
 
 export const ProcesarApi = async (method, url, data) =>{
     
-    const apiurl = 'https://localhost:7162/api/';
+    const apiurl = process.env.REACT_APP_URL;
     
     const init = {
         method: method,
@@ -14,6 +14,7 @@ export const ProcesarApi = async (method, url, data) =>{
         body: JSON.stringify(data)
 
     };
+    console.log(data);
 
     const request = new Request(apiurl + ''+ url, init);
     try {

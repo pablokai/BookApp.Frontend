@@ -1,4 +1,3 @@
-import './App.css';
 import BasicTable from './components/BasicTable';
 import Layout from './pages/Layout';
 import {BrowserRouter, Routes, Route, Form} from 'react-router-dom';
