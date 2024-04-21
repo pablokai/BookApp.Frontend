@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import {useLocation} from 'react-router-dom'
 import {ObtenerGenero} from '../../services/LibroService'
+import '../../styles/FormBooks.css'
 
 function FormBooks( ) {
     const location = useLocation();
@@ -36,8 +37,73 @@ function FormBooks( ) {
     const onChangeIdLibro = (e) => setIdLibro(e.target.value);
   return (
     <>
-        <div> { ListaGenero.map( (item)=> <p>{item.nombre}</p>)}</div>
-        <h1 style={{color: "black"}}>{operacion}</h1>
+                    
+             
+          <div className='contenedorHeader'>
+            <h1 className='titulo'>Mantenimiento de Libros</h1>
+            <button className='add-buttonUno'>Guardar Libro</button>
+            <button className='add-buttonDos'>Modificar Libro</button>
+          </div>  
+
+           <div class="containerinput">
+              <div className='containerinputUno'>
+                <div className='inputscontainer'>
+                  <label class='form-label' for="titulo">Título</label>
+                  <input class="form-input" type="text" id="titulo" placeholder="Ingrese el título del libro"></input>
+                </div>
+                <div className='inputscontainer'>
+                  <label class="form-label" for="autor">Nombre del autor</label>
+                  <input class="form-input" type="text" id="autor" placeholder="Ingrese el nombre del autor del libro"></input>
+                </div>
+                <div className='inputscontainer'>
+                  <label class="form-label" for="paginas">Primer Apellido del Autor</label>
+                  <input class="form-input" type="number" id="paginas" placeholder="Ingrese el primer apellido del autor del libro"></input>
+                </div>
+                <div className='inputscontainer'>
+                  <label class="form-label" for="paginas">Segundo Apellido del Autor</label>
+                  <input class="form-input" type="number" id="paginas" placeholder="Ingrese el segundo apellido del autor del libro"></input>
+                </div>
+
+              </div>
+              <div className='containerinputDos'>
+              <div className='inputscontainer'>
+                  <label class="form-label" for="paginas">Total de páginas</label>
+                  <input class="form-input" type="number" id="paginas" placeholder="Ingrese el numero de páginas"></input>
+                </div>
+             
+                <div className='inputscontainer'>
+                  <label class="form-label" for="genero">Género</label>
+                  <select class="form-select" id="genero">
+                    <option value="">Seleccione un género</option>
+
+                  </select>
+                </div>
+               
+                <div className='inputscontainer'>
+                  <label class="form-label" for="paginas">Fecha de Publicacion</label>
+                  <input class="form-input" type="date"  placeholder="Seleccione la fecha"></input>
+                </div>
+              
+                <div className='inputscontainer'>
+                  <label class="form-label" for="paginas">Editorial</label>
+                  <input class="form-input" type="number" id="paginas" placeholder="Ingrese el nombre de la editorial"></input>
+                </div>
+
+              </div>
+        
+             
+                
+
+
+              
+           </div> 
+           
+         
+         
+         
+                
+              
+         
         
     </>
   )
