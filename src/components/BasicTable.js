@@ -50,6 +50,7 @@ function BasicTable({tableData, tableColumns}) {
   });
 
   const options = {
+    filter: false,
     filterType: "dropdown",
     rowsPerPage : 10,
     download: false,

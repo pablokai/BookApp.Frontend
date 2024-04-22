@@ -38,3 +38,9 @@ img{
     height:80px;
     object-fit: cover;
 }
+
+
+.delete-message{
+    margin-bottom: 2vh;
+    width: 100%;
+}

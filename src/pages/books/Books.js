@@ -3,8 +3,9 @@ import BasicTable from '../../components/BasicTable'
 import {useNavigate, useLocation} from 'react-router-dom'
 import editicon from "../../images/pencil.png";
 import deleteicon from "../../images/delete.png";
+import noimageicon from "../../images/noimage.jpg";
 import '../../styles/books.css'
-import { Button, Modal } from "flowbite-react"; 
+import { Button, Modal, Alert } from "flowbite-react"; 
 import {EliminarLibro, ListarLibros} from '../../services/LibroService'
 import { toBase64 } from '../../utils/Base64Converter';
 import { Libro } from '../../class/Libro';
@@ -13,6 +14,9 @@ function Books() {
 
     const [dataList, setDataList]= useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [mensajeBorrado, setMensajeBorrado] = useState('');
+    const [mostrarMensaje, setMostrarMensaje] = useState(false);
+    const [estadoBorrado, setEstadoBorrado] = useState(false);
 
     const [listaLibros, setListaLibros]= useState([]);
     const [idLibro, setIdLibro] = useState(0);
@@ -20,6 +24,10 @@ function Books() {
 
     const listarLibros = async () =>{
         setListaLibros(await ListarLibros());
+    }
+
+    const mostrarAlerta =  ()=>{
+        setMostrarMensaje(!mostrarMensaje);
     }
     
     const redirectForm = (rowData, operacion) =>{
@@ -31,7 +39,16 @@ function Books() {
         const libro = new Libro(idLibro, "","","","","","",0,"",new Date(),"",0)
         const response = await EliminarLibro(libro);
         
-        response.estado === 1 ?? ListarLibros();
+        if(response.estado === 1){
+            setEstadoBorrado(true);
+            listarLibros();
+           
+        }else if(response.estado === 0){
+            setEstadoBorrado(false);
+        }
+
+        setMensajeBorrado(response.mensaje);
+        mostrarAlerta();
          
     }
     useEffect( ()=>{
@@ -51,8 +68,9 @@ function Books() {
             name: "portada",
             label: "Portada",
             options: {
-                customBodyRender : (value) =>(                      
-                        <img src={value} alt='' className='bookcover'></img>
+                customBodyRender : (value) =>( 
+                        value===null || value===""? <img src={noimageicon} alt='' className='bookcover'></img>  :<img src={value} alt='' className='bookcover'></img>                
+                        
                 )
             }
         },
@@ -139,6 +157,13 @@ function Books() {
             <button className='add-button' onClick={ ()=>{ redirectForm('', 1)}}>Agregar</button>
         </div>
     </div>
+    {   mostrarMensaje &&
+                <div className='delete-message'>
+                <Alert color={estadoBorrado === true ? "success" : "failure"} onDismiss={() => mostrarAlerta()}>
+                <span className="font-medium" >{estadoBorrado === true ? "Éxito: " : "Error: "}</span> {mensajeBorrado}
+                </Alert>
+                </div>
+            }
     <BasicTable tableData={listaLibros} tableColumns={columns}></BasicTable> 
     
     <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
